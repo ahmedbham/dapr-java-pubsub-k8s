@@ -17,11 +17,13 @@
 
 	// forward ports for the app
 	"forwardPorts": [
+		5000,
 		30080
 	],
 
 	// add labels
 	"portsAttributes": {
+		"5000": { "label": "rad-app" },
 		"30080": { "label": "node-app" }
 	},
 
