@@ -34,13 +34,20 @@ http localhost:30080/order
 
 ```bash
 
-rad deploy rad/backend.bicep
-rad deploy rad/frontend.bicep
+# deploy the frontend and backend
+rad deploy rad/app.bicep
 
+# check the staut
 kje http backend-dapr:3000/order
+
+## TODO - getting a blazor error here
 kje http frontend-dapr
 
+# forward the port
+# TODO - can we expose via NodePort?
 rad component expose frontend --application dapr-tutorial --port 5000 --remote-port 80
+
+# select Port and open in browser
 
 ```
 
