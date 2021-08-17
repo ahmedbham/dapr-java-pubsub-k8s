@@ -30,6 +30,20 @@ http localhost:30080/order
 
 ```
 
+## Radius
+
+```bash
+
+rad deploy rad/backend.bicep
+rad deploy rad/frontend.bicep
+
+kje http backend-dapr:3000/order
+kje http frontend-dapr
+
+rad component expose frontend --application dapr-tutorial --port 5000 --remote-port 80
+
+```
+
 ## Original dapr Quick Start
 
 This tutorial will get you up and running with Dapr in a Kubernetes cluster. To recap, the Python App generates messages and the Node app consumes and persists them. The following architecture diagram illustrates the components that make up this quickstart:
