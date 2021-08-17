@@ -1,4 +1,3 @@
-//SAMPLE
 resource app 'radius.dev/Applications@v1alpha1' = {
   name: 'dapr-tutorial'
 
@@ -75,4 +74,3 @@ resource app 'radius.dev/Applications@v1alpha1' = {
   }
   //STATESTORE
 }
-//SAMPLE
