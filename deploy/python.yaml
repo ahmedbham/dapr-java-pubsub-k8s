@@ -20,3 +20,7 @@ spec:
       containers:
       - name: python
         image: k3d-registry.localhost:5000/dapr-python:local
+        resources:
+          limits:
+            cpu: 400m
+            memory: 100Mi

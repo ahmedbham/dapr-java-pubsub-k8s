@@ -1,47 +1,43 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: nodeapp
+  name: frontend
   labels:
-    app: node
+    app: frontend
 spec:
   type: NodePort
   selector:
-    app: node
+    app: frontend
   ports:
   - protocol: TCP
-    port: 3000
-    targetPort: 3000
+    port: 80
+    targetPort: 80
     nodePort: 30080
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp
+  name: frontend
   labels:
-    app: node
+    app: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: node
+      app: frontend
   template:
     metadata:
       labels:
-        app: node
+        app: frontend
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "nodeapp"
-        dapr.io/app-port: "3000"
+        dapr.io/app-id: "frontend"
+        dapr.io/app-port: "80"
     spec:
       containers:
-      - name: node
-        image: k3d-registry.localhost:5000/dapr-node:local
+      - name: app
+        image: radius.azurecr.io/daprtutorial-frontend
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: 500m
-            memory: 500Mi
