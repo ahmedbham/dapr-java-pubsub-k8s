@@ -45,4 +45,11 @@ kubectl wait pod redis-master-0  --for condition=ready --timeout=60s
 kubectl apply -f deploy/node.yaml
 kubectl apply -f deploy/python.yaml
 
+wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | sudo /bin/bash
+
+curl -o deploy/rad-vscode-bicep.vsix https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix
+code --install-extension deploy/rad-vscode-bicep.vsix
+
+rad env init kubernetes
+
 echo "on-create complete" >> ~/status
