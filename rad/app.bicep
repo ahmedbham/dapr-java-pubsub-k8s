@@ -1,3 +1,4 @@
+//SAMPLE
 resource app 'radius.dev/Applications@v1alpha1' = {
   name: 'dapr-tutorial'
 
@@ -44,11 +45,11 @@ resource app 'radius.dev/Applications@v1alpha1' = {
         }
       }
       //BINDINGS
-      // uses: [
-      //   {
-      //     binding: statestore.properties.bindings.default
-      //   }
-      // ]
+      uses: [
+        {
+          binding: statestore.properties.bindings.default
+        }
+      ]
       //TRAITS
       traits: [
         {
@@ -62,15 +63,16 @@ resource app 'radius.dev/Applications@v1alpha1' = {
   }
 
   //STATESTORE
-  // resource statestore 'Components' = {
-  //   name: 'statestore'
-  //   kind: 'dapr.io/StateStore@v1alpha1'
-  //   properties: {
-  //     config: {
-  //       kind: 'any'
-  //       managed: true
-  //     }
-  //   }
-  // }
+  resource statestore 'Components' = {
+    name: 'statestore'
+    kind: 'dapr.io/StateStore@v1alpha1'
+    properties: {
+      config: {
+        kind: 'any'
+        managed: true
+      }
+    }
+  }
   //STATESTORE
 }
+//SAMPLE
