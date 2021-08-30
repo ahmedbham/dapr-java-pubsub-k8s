@@ -30,16 +30,11 @@ kubectl wait node --for condition=ready --all --timeout=60s
 # install dapr
 dapr init -k --enable-mtls=false --wait
 
-# install redis
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm install redis bitnami/redis
-
-# redis config
+# deploy redis
 kubectl apply -f deploy/redis.yaml
 
 # wait for redis master to start
-kubectl wait pod redis-master-0  --for condition=ready --timeout=60s
+kubectl wait pod -l app=redis --for condition=ready --timeout=60s
 
 # deploy apps
 kubectl apply -f deploy/node.yaml
