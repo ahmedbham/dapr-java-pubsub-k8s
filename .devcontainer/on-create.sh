@@ -23,21 +23,7 @@ docker tag dapriosamples/hello-k8s-python:latest k3d-registry.localhost:5000/dap
 docker push k3d-registry.localhost:5000/dapr-python:local
 docker rmi dapriosamples/hello-k8s-python:latest
 
-# create k3d cluster
-k3d cluster create --registry-use k3d-registry.localhost:5000 --config deploy/k3d.yaml
-kubectl wait node --for condition=ready --all --timeout=60s
-
-# install dapr
-dapr init -k --enable-mtls=false --wait
-
-# deploy redis
-kubectl apply -f deploy/redis.yaml
-
-# wait for redis master to start
-kubectl wait pod -l app=redis --for condition=ready --timeout=60s
-
-# deploy apps
-kubectl apply -f deploy/node.yaml
-kubectl apply -f deploy/python.yaml
+# create the cluster
+make create
 
 echo "on-create complete" >> ~/status

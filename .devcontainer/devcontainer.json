@@ -1,9 +1,13 @@
 {
-	"name": "dapr-K3d",
+	"name": "dapr-k3d",
 	"dockerFile": "Dockerfile",
 
 	// do not change these if you want Docker in Docker support
-	"runArgs": ["--init", "--privileged"],
+	"runArgs": [
+		"--init",
+		"--privileged"
+	],
+
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
 
@@ -22,7 +26,9 @@
 
 	// add labels
 	"portsAttributes": {
-		"30080": { "label": "node-app" }
+		"30080": {
+			"label": "node-app"
+		}
 	},
 
 	// Install extensions
@@ -43,6 +49,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "/bin/bash -c .devcontainer/post-create.sh",
 
-	// Use 'postStartCommand' to run commands after the container starts.
+	// Use 'postStartCommand' to run commands every time the container starts.
 	"postStartCommand": "/bin/bash -c .devcontainer/post-start.sh"
 }
