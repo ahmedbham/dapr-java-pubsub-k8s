@@ -1,0 +1,12 @@
+# call to consumer
+GET http://localhost:8081/generate?message=hello HTTP/1.1
+
+###
+
+# call to dapr producer
+GET http://localhost:8083/generate?message=mello HTTP/1.1
+
+###
+
+# call to dapr producer via dapr port 
+GET http://localhost:50005/generate?message=hello HTTP/1.1
