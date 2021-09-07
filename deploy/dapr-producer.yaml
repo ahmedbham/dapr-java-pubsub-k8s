@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dapr-producer
+  name: dapr-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dapr-producer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dapr-producer
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "dapr-producer"
+        # dapr.io/app-port: "3000"    
+    spec:
+      containers:
+      - image: k3d-registry.localhost:5000/dapr-producer
+        name: dapr-producer
+        resources: {}
+status: {}
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dapr-producer-service
+  name: dapr-producer-service
+spec:
+  ports:
+  - name: 8083-8083
+    port: 8083
+    protocol: TCP
+    targetPort: 8083
+    nodePort: 30091
+  selector:
+    app: dapr-producer-service
+  type: NodePort
+status:
+  loadBalancer: {}

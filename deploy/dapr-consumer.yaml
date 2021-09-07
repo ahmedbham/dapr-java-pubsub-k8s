@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dapr-consumer
+  name: dapr-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dapr-consumer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dapr-consumer
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "dapr-consumer"
+        dapr.io/app-port: "3000"  
+    spec:
+      containers:
+      - image: k3d-registry.localhost:5000/dapr-consumer
+        name: dapr-consumer
+        ports:
+        - containerPort: 3000
+        resources: {}
+status: {}
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dapr-consumer-service
+  name: dapr-consumer-service
+spec:
+  ports:
+  - name: 3000-3000
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+    nodePort: 30095
+  selector:
+    app: dapr-consumer-service
+  type: NodePort
+status:
+  loadBalancer: {}

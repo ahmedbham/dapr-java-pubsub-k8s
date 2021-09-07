@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springboot-consumer
+  name: springboot-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-consumer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: springboot-consumer
+    spec:
+      containers:
+      - image: k3d-registry.localhost:5000/springboot-consumer
+        name: springboot-consumer
+        resources: {}
+status: {}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springboot-consumer
+  name: springboot-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-consumer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: springboot-consumer
+    spec:
+      containers:
+      - image: k3d-registry.localhost:5000/springboot-consumer
+        name: springboot-consumer
+        resources: {}
+status: {}
