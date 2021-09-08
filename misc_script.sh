@@ -37,5 +37,3 @@ kubectl create service nodeport dapr-consumer-service --tcp=3000:3000 --dry-run=
 k port-forward pod/dapr-producer-7fbbc8776-l5f8w 8888:8083
 
 k port-forward pod/dapr-producer-7fbbc8776-l5f8w 8888:8083
-
-sudo apt-get install azure-functions-core-tools-3

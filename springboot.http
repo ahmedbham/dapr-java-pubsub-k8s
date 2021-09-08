@@ -9,7 +9,7 @@ GET http://localhost:8083/generate?message=mello HTTP/1.1
 ###
 
 # call to dapr producer via dapr port 
-GET http://localhost:30091/generate?message=chello HTTP/1.1
+GET http://localhost:9999/generate?message=chello HTTP/1.1
 
 ###
 

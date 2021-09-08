@@ -16,15 +16,16 @@ create : delete
 	# install dapr
 	dapr init -k --enable-mtls=false --wait
 
-	# deploy redis
-	kubectl apply -f deploy/redis.yaml
-
-	# wait for redis master to start
-	kubectl wait pod -l app=redis --for condition=ready --timeout=60s
-
+	# deploy kafka
+	kubectl create ns kafka
+	helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f deploy/kafka-non-persistence.yaml
+	k apply -f deploy/kafka_bindings.yaml
+	
 	# deploy apps
-	kubectl apply -f deploy/node.yaml
-	kubectl apply -f deploy/python.yaml
+	kubectl apply -f deploy/dapr-consumer.yaml
+	kubectl apply -f deploy/dapr-producer.yaml
+	kubectl apply -f deploy/springboot-consumer.yaml -n kafka
+	kubectl apply -f deploy/springboot-producer.yaml -n kafka
 
 delete :
 	# delete the cluster (if exists)
