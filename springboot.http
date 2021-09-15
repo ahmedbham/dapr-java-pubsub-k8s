@@ -4,14 +4,39 @@ GET http://localhost:8081/generate?message=hello HTTP/1.1
 ###
 
 # call to dapr producer
-GET http://localhost:8083/generate?message=mello HTTP/1.1
+GET http://localhost:8888/generate?message=killo HTTP/1.1
 
 ###
 
 # call to dapr producer via dapr port 
-GET http://localhost:9999/generate?message=chello HTTP/1.1
+GET http://localhost:9999/generate?message=bhillo HTTP/1.1
 
 ###
 
 # call to springboot producer via NodePort
-GET http://localhost:8888/generate?message=camn HTTP/1.1
+GET http://localhost:30091/generate?message=camn HTTP/1.1
+
+###
+
+# Post ot azure func
+POST http://localhost:7777/api/hello HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample"
+}
+
+###
+
+# port forwarded request to fabricam-functions
+GET http://localhost:9080/api/HttpExample?name=Functions HTTP/1/1
+
+###
+
+# Post ot azure func
+POST http://localhost:8666/sample123 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample"
+}
