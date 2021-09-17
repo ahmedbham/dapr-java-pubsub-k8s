@@ -29,14 +29,18 @@ content-type: application/json
 ###
 
 # port forwarded request to fabricam-functions
-GET http://localhost:9080/api/HttpExample?name=Functions HTTP/1/1
+GET http://localhost:8989/sample123?name=Functions HTTP/1/1
 
 ###
 
 # Post ot azure func
-POST http://localhost:8666/sample123 HTTP/1.1
+POST http://localhost:8989/sample123 HTTP/1.1
 content-type: application/json
 
 {
     "name": "sample"
 }
+
+###
+# sending an OPTIONS call to azure function
+OPTIONS http://localhost:8989/sample123 HTTP/1.1

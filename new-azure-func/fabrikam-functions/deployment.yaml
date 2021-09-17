@@ -4,8 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: fabrikam-functions
-  name: fabrikam-functions
-  namespace: kafka  
+  name: fabrikam-functions 
 spec:
   replicas: 1
   selector:
@@ -21,7 +20,8 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "fabrikam-functions"
-        dapr.io/app-port: "80"    
+        dapr.io/app-port: "80" 
+        dapr.io/log-level: "debug"   
     spec:
       containers:
       - image: k3d-registry.localhost:5000/fabrikam-functions
@@ -41,7 +41,6 @@ metadata:
   labels:
     app: fabrikam-functions
   name: fabrikam-functions
-  namespace: kafka
 spec:
   ports:
   - name: 8080-8080

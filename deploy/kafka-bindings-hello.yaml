@@ -1,0 +1,21 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: api-hello
+spec:
+  type: bindings.kafka
+  version: v1
+  metadata:
+  # Kafka broker connection setting
+  - name: brokers
+    value: dapr-kafka.kafka:9092
+  # consumer configuration: topic and consumer group
+  - name: topics
+    value: hello
+  - name: consumerGroup
+    value: group1
+  # publisher configuration: topic
+  - name: publishTopic
+    value: hello
+  - name: authRequired
+    value: "false"

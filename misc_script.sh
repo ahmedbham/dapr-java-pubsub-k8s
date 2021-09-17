@@ -34,6 +34,4 @@ kubectl create service nodeport dapr-producer-service --tcp=8083:8083 --dry-run=
 
 kubectl create service nodeport dapr-consumer-service --tcp=3000:3000 --dry-run=client -o yaml >> deploy/dapr-consumer.yaml
 
-k port-forward pod/dapr-producer-7fbbc8776-l5f8w 8888:8083
-
-k port-forward pod/dapr-producer-7fbbc8776-l5f8w 8888:8083
+k port-forward pod/dapr-producer-7fbbc8776-c67w4 8888:8083
