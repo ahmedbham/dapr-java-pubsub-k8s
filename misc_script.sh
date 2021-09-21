@@ -35,3 +35,8 @@ kubectl create service nodeport dapr-producer-service --tcp=8083:8083 --dry-run=
 kubectl create service nodeport dapr-consumer-service --tcp=3000:3000 --dry-run=client -o yaml >> deploy/dapr-consumer.yaml
 
 k port-forward pod/dapr-producer-7fbbc8776-c67w4 8888:8083
+
+
+Host.Startup[515]
+      A host error has occurred during startup operation '28adf352-d223-4609-8a23-953e513826ce'.
+System.DllNotFoundException: Failed to load the librdkafka native library.

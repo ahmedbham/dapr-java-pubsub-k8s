@@ -71,13 +71,13 @@ helm repo update
 kubectl create namespace keda
 helm install keda kedacore/keda --namespace keda
 
-helm install ingress-controller bitnami/nginx-ingress-controller \
-    --namespace ingress-nginx \
-    --set controller.replicaCount=1 \
-    --set controller.metrics.enabled=true \
-    --set controller.podAnnotations."prometheus\.io/scrape"="true" \
-    --set controller.podAnnotations."prometheus\.io/port"="10254"  \
-    --set controller.service.type=NodePort
+# helm install ingress-controller bitnami/nginx-ingress-controller \
+#     --namespace ingress-nginx \
+#     --set controller.replicaCount=1 \
+#     --set controller.metrics.enabled=true \
+#     --set controller.podAnnotations."prometheus\.io/scrape"="true" \
+#     --set controller.podAnnotations."prometheus\.io/port"="10254"  \
+#     --set controller.service.type=NodePort
 
 # create the cluster
 make create
