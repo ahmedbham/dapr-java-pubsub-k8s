@@ -20,12 +20,17 @@ create : delete
 	kubectl create ns kafka
 	helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f deploy/kafka-non-persistence.yaml
 	k apply -f deploy/kafka_bindings.yaml
+
+	# deploy keda
+	kubectl create namespace keda
+	helm install keda kedacore/keda --namespace keda
 	
 	# deploy apps
 	kubectl apply -f deploy/dapr-consumer.yaml
 	kubectl apply -f deploy/dapr-producer.yaml
 	kubectl apply -f deploy/springboot-consumer.yaml -n kafka
 	kubectl apply -f deploy/springboot-producer.yaml -n kafka
+	kubectl apply -f deploy/kafka-function-deployment.yaml
 
 delete :
 	# delete the cluster (if exists)

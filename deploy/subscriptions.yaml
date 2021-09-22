@@ -9,3 +9,4 @@ spec:
 scopes:
 - fabrikam-functions
 - dapr-consumer
+- kafka-function

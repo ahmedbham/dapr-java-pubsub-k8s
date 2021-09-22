@@ -12,17 +12,6 @@ docker network create dapr
 k3d registry create registry.localhost --port 5000
 docker network connect dapr k3d-registry.localhost
 
-# # push apps to local registry
-# docker pull dapriosamples/hello-k8s-node:latest
-# docker tag dapriosamples/hello-k8s-node:latest k3d-registry.localhost:5000/dapr-node:local
-# docker push k3d-registry.localhost:5000/dapr-node:local
-# docker rmi dapriosamples/hello-k8s-node:latest
-
-# docker pull dapriosamples/hello-k8s-python:latest
-# docker tag dapriosamples/hello-k8s-python:latest k3d-registry.localhost:5000/dapr-python:local
-# docker push k3d-registry.localhost:5000/dapr-python:local
-# docker rmi dapriosamples/hello-k8s-python:latest
-
 # create dapr-springboot consumer app
 cd dapr-springboot/demo-dapr-consumer
 ./mvnw clean install -DskipTests
@@ -61,6 +50,12 @@ docker push k3d-registry.localhost:5000/springboot-producer
 docker rmi demo:0.0.1-SNAPSHOT
 cd ../../
 
+# create kafka-function
+cd azure-functions-kafka-extension/kafka-function
+docker build . -t k3d-registry.localhost:5000/kafka-function
+docker push k3d-registry.localhost:5000/kafka-function
+cd ../../
+
 # set up kafka for k8s cluster
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
@@ -68,8 +63,7 @@ helm repo update
 # deploy KEDA on k8s cluster
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
-kubectl create namespace keda
-helm install keda kedacore/keda --namespace keda
+
 
 # helm install ingress-controller bitnami/nginx-ingress-controller \
 #     --namespace ingress-nginx \
