@@ -6,13 +6,13 @@ metadata:
 spec:
   scaleTargetRef:
     name: kafka-function
-  pollingInterval: 30
+  pollingInterval: 10
   triggers:
   - type: kafka
     metadata:
       bootstrapServers: dapr-kafka.kafka:9092
       consumerGroup: group1       # Make sure that this consumer group name is the same one as the one that is consuming topics
-      topic: sample
+      topic: new-topic
       # Optional
-      lagThreshold: "50"
+      lagThreshold: "1"
       offsetResetPolicy: latest

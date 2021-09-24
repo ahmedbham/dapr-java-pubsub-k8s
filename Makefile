@@ -14,12 +14,13 @@ create : delete
 	kubectl wait node --for condition=ready --all --timeout=60s
 
 	# install dapr
-	dapr init -k --enable-mtls=false --wait
+	# dapr init -k --enable-mtls=false --wait
 
 	# deploy kafka
 	kubectl create ns kafka
 	helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f deploy/kafka-non-persistence.yaml
-	k apply -f deploy/kafka_bindings.yaml
+	# kubectl apply -f deploy/kafka_bindings.yaml
+	kubectl run dapr-kafka-client --restart='Never' --image docker.io/bitnami/kafka:2.8.0-debian-10-r84 --namespace kafka --command -- sleep infinity
 
 	# deploy keda
 	kubectl create namespace keda

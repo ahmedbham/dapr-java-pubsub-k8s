@@ -36,6 +36,7 @@ kubectl create service nodeport dapr-consumer-service --tcp=3000:3000 --dry-run=
 
 k port-forward pod/dapr-producer-7fbbc8776-c67w4 8888:8083
 
+docker build . -t k3d-registry.localhost:5000/kafka-function
 
 Host.Startup[515]
       A host error has occurred during startup operation '28adf352-d223-4609-8a23-953e513826ce'.
