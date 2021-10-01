@@ -3,8 +3,8 @@ kind: Subscription
 metadata:
   name: myevent-subscription
 spec:
-  topic: hello
-  route: /api/hello
-  pubsubname: api-hello
-scopes:
-- func-hello-consumer
+  topic: avrotopic
+  route: /avrotopic
+  pubsubname: messagebus
+# scopes:
+# - dapr-consumer

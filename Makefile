@@ -14,7 +14,7 @@ create : delete
 	kubectl wait node --for condition=ready --all --timeout=60s
 
 	# install dapr
-	# dapr init -k --enable-mtls=false --wait
+	dapr init -k --enable-mtls=false --wait
 
 	# deploy kafka
 	kubectl create ns kafka
@@ -27,11 +27,11 @@ create : delete
 	helm install keda kedacore/keda --namespace keda
 	
 	# deploy apps
-	kubectl apply -f deploy/dapr-consumer.yaml
-	kubectl apply -f deploy/dapr-producer.yaml
-	kubectl apply -f deploy/springboot-consumer.yaml -n kafka
-	kubectl apply -f deploy/springboot-producer.yaml -n kafka
-	kubectl apply -f deploy/kafka-function-deployment.yaml
+	# kubectl apply -f deploy/dapr-consumer.yaml
+	# kubectl apply -f deploy/dapr-producer.yaml
+	# kubectl apply -f deploy/springboot-consumer.yaml -n kafka
+	# kubectl apply -f deploy/springboot-producer.yaml -n kafka
+	# kubectl apply -f deploy/kafka-function-deployment.yaml
 
 delete :
 	# delete the cluster (if exists)

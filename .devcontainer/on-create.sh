@@ -18,7 +18,7 @@ cd dapr-springboot/demo-dapr-consumer
 ./mvnw spring-boot:build-image -DskipTests
 docker tag demo-dapr-consumer:0.0.1-SNAPSHOT k3d-registry.localhost:5000/dapr-consumer
 docker push k3d-registry.localhost:5000/dapr-consumer
-docker rmi dapr-consumer:demo-dapr-consumer:0.0.1-SNAPSHOT
+docker rmi demo-dapr-consumer:0.0.1-SNAPSHOT
 cd ../../
 
 # create dapr-springboot producer app
@@ -49,6 +49,17 @@ docker tag demo:0.0.1-SNAPSHOT k3d-registry.localhost:5000/springboot-producer
 docker push k3d-registry.localhost:5000/springboot-producer
 docker rmi demo:0.0.1-SNAPSHOT
 cd ../../
+
+# create dapr subsub producer
+cd dapr-springboot/pubsub-dapr-producer/producer
+./mvnw clean install
+./mvnw spring-boot:build-image
+docker tag producer:0.0.1-SNAPSHOT k3d-registry.localhost:5000/pubsub-producer
+docker push k3d-registry.localhost:5000/pubsub-producer
+docker rmi producer:0.0.1-SNAPSHOT
+cd ../../../
+
+
 
 # create kafka-function
 cd azure-functions-kafka-extension/kafka-function

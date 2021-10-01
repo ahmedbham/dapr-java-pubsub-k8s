@@ -1,12 +1,12 @@
 apiVersion: dapr.io/v1alpha1
 kind: Subscription
 metadata:
-  name: myevent-subscription
+  name: new-subscription
 spec:
-  topic: sample
-  route: /sample123
-  pubsubname: sample123
-scopes:
-- fabrikam-functions
-- dapr-consumer
-- kafka-function
+  topic: testingtopic
+  route: /
+  pubsubname: messagebus
+# scopes:
+# - fabrikam-functions
+# - dapr-consumer
+# - kafka-function

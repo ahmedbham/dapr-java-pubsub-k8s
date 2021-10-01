@@ -5,6 +5,7 @@ metadata:
   labels:
     app: dapr-consumer
   name: dapr-consumer
+  namespace: kafka
 spec:
   replicas: 1
   selector:
@@ -42,7 +43,7 @@ metadata:
 spec:
   ports:
   - name: 3000-3000
-    port: 3000
+    port: 3020
     protocol: TCP
     targetPort: 3000
     nodePort: 30095

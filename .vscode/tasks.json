@@ -37,6 +37,18 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "bridge-to-kubernetes.resource",
+            "type": "bridge-to-kubernetes.resource",
+            "resource": "pubsub-producer-dapr",
+            "resourceType": "service",
+            "ports": [
+                8085
+            ],
+            "targetCluster": "k3d-k3s-default",
+            "targetNamespace": "default",
+            "useKubernetesServiceEnvironmentVariables": false
         }
     ]
 }

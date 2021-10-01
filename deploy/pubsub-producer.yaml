@@ -19,16 +19,17 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "pubsub-producer"
+        dapr.io/log-level: "debug"
         # dapr.io/app-port: "3050"    
     spec:
       containers:
       - image: k3d-registry.localhost:5000/pubsub-producer
         name: pubsub-producer
-        resources: 
-          requests:
-            memory: "500Mi"
-          limits:
-            memory: "700Mi"
+        # resources: 
+        #   requests:
+        #     memory: "500Mi"
+        #   limits:
+        #     memory: "700Mi"
 status: {}
 
 ---
