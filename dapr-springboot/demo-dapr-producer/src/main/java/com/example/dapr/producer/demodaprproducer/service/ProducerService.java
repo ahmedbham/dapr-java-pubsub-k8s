@@ -8,16 +8,15 @@ import io.dapr.client.DaprClientBuilder;
 
 @Service
 public class ProducerService {
-    static final String BINDING_NAME = "sample123";
+    static final String PUBSUB_NAME = "messagebus";
 
-    static final String BINDING_OPERATION = "create";
+    static final String TOPIC_NAME = "sample123";
 
     public void produce(String message){
         System.out.println("producing message: " + message);
 
         DaprClient client = (new DaprClientBuilder()).build();
-            client.invokeBinding(BINDING_NAME, BINDING_OPERATION, message).block();
-        
+            client.publishEvent(PUBSUB_NAME, TOPIC_NAME, message).block();
         
     }
 }

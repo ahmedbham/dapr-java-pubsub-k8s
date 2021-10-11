@@ -5,6 +5,8 @@ metadata:
   labels:
     app: springboot-consumer
   name: springboot-consumer
+  namesapce: kafka
+
 spec:
   replicas: 1
   selector:
@@ -16,30 +18,11 @@ spec:
       creationTimestamp: null
       labels:
         app: springboot-consumer
-    spec:
-      containers:
-      - image: k3d-registry.localhost:5000/springboot-consumer
-        name: springboot-consumer
-        resources: {}
-status: {}
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    app: springboot-consumer
-  name: springboot-consumer
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: springboot-consumer
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: springboot-consumer
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "springboot-consumer"
+        dapr.io/app-port: '8110'
+        dapr.io/log-level: "debug"  
     spec:
       containers:
       - image: k3d-registry.localhost:5000/springboot-consumer

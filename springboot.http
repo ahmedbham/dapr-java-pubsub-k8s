@@ -9,7 +9,7 @@ GET http://localhost:8888/generate?message=killo HTTP/1.1
 ###
 
 # call to dapr pubsub producer
-GET http://localhost:8181/generate?message=nillo HTTP/1.1
+GET http://localhost:8888/generate?message=nillo HTTP/1.1
 
 ###
 
@@ -24,7 +24,7 @@ GET http://localhost:9999/generate?message=bhillo HTTP/1.1
 ###
 
 # call to springboot producer via NodePort
-GET http://localhost:30091/generate?message=camn HTTP/1.1
+GET http://localhost:8888/generate?message=camn HTTP/1.1
 
 ###
 

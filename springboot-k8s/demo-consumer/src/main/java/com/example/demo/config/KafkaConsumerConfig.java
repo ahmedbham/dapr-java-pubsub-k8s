@@ -4,8 +4,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.demo.avro.model.AvroHttpRequest;
-import com.example.demo.avro.util.serialization.AvroDeSerealizer;
+// import com.example.demo.avro.model.AvroHttpRequest;
+// import com.example.demo.avro.util.serialization.AvroDeSerealizer;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -18,20 +18,20 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 @Configuration
 public class KafkaConsumerConfig {
     @Bean
-    public ConsumerFactory<String, AvroHttpRequest> consumerFactory() {
+    public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<String, Object>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "dapr-kafka.kafka:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "shine-local-avro");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, AvroDeSerealizer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
                // See https://kafka.apache.org/documentation/#producerconfigs for more properties
-               return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new AvroDeSerealizer());
+               return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new StringDeserializer());
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, AvroHttpRequest> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
 
-    ConcurrentKafkaListenerContainerFactory<String, AvroHttpRequest> factory =
+    ConcurrentKafkaListenerContainerFactory<String, String> factory =
         new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory());
     return factory;
