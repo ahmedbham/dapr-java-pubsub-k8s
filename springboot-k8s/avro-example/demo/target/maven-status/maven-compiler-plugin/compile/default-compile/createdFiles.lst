@@ -1,0 +1,5 @@
+example/avro/User$1.class
+example/avro/User.class
+main/java/com/example/GenericMain.class
+main/java/com/example/SpecificMain.class
+example/avro/User$Builder.class
