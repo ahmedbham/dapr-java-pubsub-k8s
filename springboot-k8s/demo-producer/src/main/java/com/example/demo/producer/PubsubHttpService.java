@@ -22,7 +22,7 @@ import org.springframework.kafka.support.SendResult;
 import org.apache.kafka.common.serialization.StringSerializer;
 // import com.example.demo.avro.util.serialization.AvroSerealizer;
 import com.example.demo.avro.util.serialization.*;
-import com.example.demo.avro.model.*;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
