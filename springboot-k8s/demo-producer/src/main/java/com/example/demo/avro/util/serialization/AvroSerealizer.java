@@ -1,6 +1,6 @@
 package com.example.demo.avro.util.serialization;
 
-import com.example.demo.avro.model.AvroHttpRequest;
+
 // import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.avro.io.*;
@@ -14,7 +14,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-public class AvroSerealizer implements org.apache.kafka.common.serialization.Serializer<AvroHttpRequest>{
+import example.avro.User;
+
+public class AvroSerealizer implements org.apache.kafka.common.serialization.Serializer<User>{
     private static final Logger logger = LoggerFactory.getLogger(AvroSerealizer.class);
     // private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -25,20 +27,20 @@ public class AvroSerealizer implements org.apache.kafka.common.serialization.Ser
     }
 
     @Override
-    public byte[] serialize(String topic, AvroHttpRequest request) {
+    public byte[] serialize(String topic, User request) {
         try {
             if (request == null){
                 System.out.println("Null received at serializing");
                 return null;
             }
             System.out.println("Serializing...");
-            DatumWriter<AvroHttpRequest> writer = new SpecificDatumWriter<>(AvroHttpRequest.class);
+            DatumWriter<User> writer = new SpecificDatumWriter<>(User.class);
             byte[] data = new byte[0];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Encoder jsonEncoder = null;
         try {
             jsonEncoder = EncoderFactory.get()
-                .jsonEncoder(AvroHttpRequest.getClassSchema(), stream);
+                .jsonEncoder(User.getClassSchema(), stream);
             writer.write(request, jsonEncoder);
             jsonEncoder.flush();
             data = stream.toByteArray();
@@ -55,14 +57,14 @@ public class AvroSerealizer implements org.apache.kafka.common.serialization.Ser
     public void close() {
     }
 
-    public byte[] serealizeAvroHttpRequestJSON(AvroHttpRequest request) {
-        DatumWriter<AvroHttpRequest> writer = new SpecificDatumWriter<>(AvroHttpRequest.class);
+    public byte[] serealizeUserJSON(User request) {
+        DatumWriter<User> writer = new SpecificDatumWriter<>(User.class);
         byte[] data = new byte[0];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Encoder jsonEncoder = null;
         try {
             jsonEncoder = EncoderFactory.get()
-                .jsonEncoder(AvroHttpRequest.getClassSchema(), stream);
+                .jsonEncoder(User.getClassSchema(), stream);
             writer.write(request, jsonEncoder);
             jsonEncoder.flush();
             data = stream.toByteArray();
@@ -72,8 +74,8 @@ public class AvroSerealizer implements org.apache.kafka.common.serialization.Ser
         return data;
     }
 
-    public byte[] serealizeAvroHttpRequestBinary(AvroHttpRequest request) {
-        DatumWriter<AvroHttpRequest> writer = new SpecificDatumWriter<>(AvroHttpRequest.class);
+    public byte[] serealizeUserBinary(User request) {
+        DatumWriter<User> writer = new SpecificDatumWriter<>(User.class);
         byte[] data = new byte[0];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Encoder jsonEncoder = EncoderFactory.get()
