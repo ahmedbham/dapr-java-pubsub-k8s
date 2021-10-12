@@ -52,7 +52,7 @@ public class ProducerService {
 
     public void produce(String message){
         ClientIdentifier clientIdentifier = new ClientIdentifier("host1", "10.0.0.1");
-        String[] employeeNames = { "amp1", "emp2"};
+        List<java.lang.CharSequence> employeeNames = Arrays.asList("amp1", "emp2");
         // Active active = new Active();
         AvroHttpRequest request = new AvroHttpRequest(100L, clientIdentifier, employeeNames, com.example.demo.avro.model.Active.YES );
         // AvroSerealizer serealizer = new AvroSerealizer();
