@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dapr.Topic;
 import io.dapr.client.domain.CloudEvent;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Mono;
@@ -20,7 +20,7 @@ public class WithoutCloudEventController {
    */
     @Topic(name = "testingtopic", pubsubName = "messagebus")
     @PostMapping(path = "/testingtopic")
-    public Mono<Void> handleInputBinding(@RequestBody(required = false) CloudEvent<String> body) {
+    public Mono<Void> handleInputBinding(@RequestParam (required = false) String msg) {
         return Mono.fromRunnable(() -> {
             try {
                 // CloudEvent envelope = SERIALIZER.deserialize(body, CloudEventEnvelope.class);
@@ -29,7 +29,7 @@ public class WithoutCloudEventController {
                 // System.out.println("Subscriber got message: " + message);
               // System.out.println("Subscriber got: " + OBJECT_MAPPER.writeValueAsString(data));
               // System.out.println("Subscriber got: " + OBJECT_MAPPER.writeValueAsString(cloudEvent));
-              System.out.println("Received message through binding: " + (body == null ? "" : body.getData()));
+              System.out.println("Received message through binding: " + (msg == null ? "" : msg));
             } catch (Exception e) {
               throw new RuntimeException(e);
             }
