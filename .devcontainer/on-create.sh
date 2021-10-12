@@ -50,7 +50,7 @@ docker push k3d-registry.localhost:5000/springboot-producer
 docker rmi demo:0.0.1-SNAPSHOT
 cd ../../
 
-# create dapr subsub producer
+# create dapr pubsub producer
 cd dapr-springboot/pubsub-dapr-producer/producer
 ./mvnw clean install
 ./mvnw spring-boot:build-image
