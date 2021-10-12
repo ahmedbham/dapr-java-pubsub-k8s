@@ -17,10 +17,10 @@ spec:
       creationTimestamp: null
       labels:
         app: springboot-producer
-      annotations:
-        dapr.io/enabled: "true"
-        dapr.io/app-id: "springboot-producer"
-        dapr.io/log-level: "debug"  
+      # annotations:
+      #   dapr.io/enabled: "true"
+      #   dapr.io/app-id: "springboot-producer"
+      #   dapr.io/log-level: "debug"  
     spec:
       containers:
       - image: k3d-registry.localhost:5000/springboot-producer

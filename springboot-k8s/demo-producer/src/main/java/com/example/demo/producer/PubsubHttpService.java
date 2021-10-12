@@ -20,8 +20,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.SendResult;
 import org.apache.kafka.common.serialization.StringSerializer;
-import com.example.demo.avro.util.serialization.AvroSerealizer;
-import com.example.demo.avro.model.*;
+// import com.example.demo.avro.util.serialization.AvroSerealizer;
+import com.example.demo.avro.util.serialization.*;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,6 +32,8 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import example.avro.User;
+
 @Service
 public class PubsubHttpService {
     
@@ -39,23 +42,25 @@ public class PubsubHttpService {
             .version(HttpClient.Version.HTTP_1_1)
             .build();
 
-            ClientIdentifier clientIdentifier = new ClientIdentifier("host1", "10.0.0.1");
-            List<java.lang.CharSequence> employeeNames = Arrays.asList("amp1", "emp2");
-            // Active active = new Active();
-            AvroHttpRequest request = new AvroHttpRequest(100L, clientIdentifier, employeeNames, com.example.demo.avro.model.Active.YES );
-            AvroSerealizer avroSerealizer = new AvroSerealizer();
-            byte[] data = avroSerealizer.serealizeAvroHttpRequestJSON(request);
-            avroSerealizer.close();
+            User user = User.newBuilder()
+             .setName("Charlie")
+             .setFavoriteColor("blue")
+             .setFavoriteNumber(null)
+             .build();
+            
+        //     AvroSerealizer avroSerealizer = new AvroSerealizer();
+        //     byte[] data = avroSerealizer.serealizeUserJSON(user);
+        //     avroSerealizer.close();
 
-        HttpRequest httprequest = HttpRequest.newBuilder(new URI("http://localhost:3500/v1.0/publish/messagebus/avrotopic"))
-            .version(HttpClient.Version.HTTP_1_1)
-            .header("Content-Type", "application/json")
-            .POST(BodyPublishers.ofByteArray(data))
-            // .headers("dapr-app-id", "messagebus")
-            .build();
-        HttpResponse<String> response = client.send(httprequest, BodyHandlers.ofString());
-        String responseBody = response.body();
-        System.out.println("httpPostRequest : " + responseBody);
+        // HttpRequest httprequest = HttpRequest.newBuilder(new URI("http://localhost:3500/v1.0/publish/messagebus/avrotopic"))
+        //     .version(HttpClient.Version.HTTP_1_1)
+        //     .header("Content-Type", "application/json")
+        //     .POST(BodyPublishers.ofByteArray(data))
+        //     // .headers("dapr-app-id", "messagebus")
+        //     .build();
+        // HttpResponse<String> response = client.send(httprequest, BodyHandlers.ofString());
+        // String responseBody = response.body();
+        // System.out.println("httpPostRequest : " + responseBody);
     } 
     
 }

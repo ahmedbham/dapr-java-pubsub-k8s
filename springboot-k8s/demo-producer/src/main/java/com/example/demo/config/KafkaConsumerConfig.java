@@ -5,7 +5,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.demo.avro.model.AvroHttpRequest;
+import example.avro.User;
 import com.example.demo.avro.util.serialization.AvroDeSerealizer;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -19,7 +19,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 @Configuration
 public class KafkaConsumerConfig {
     @Bean
-    public ConsumerFactory<String, AvroHttpRequest> consumerFactory() {
+    public ConsumerFactory<String, User> consumerFactory() {
         Map<String, Object> props = new HashMap<String, Object>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "dapr-kafka.kafka:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "shine-local-avro");
@@ -30,9 +30,9 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, AvroHttpRequest> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, User> kafkaListenerContainerFactory() {
 
-    ConcurrentKafkaListenerContainerFactory<String, AvroHttpRequest> factory =
+    ConcurrentKafkaListenerContainerFactory<String, User> factory =
         new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory());
     return factory;

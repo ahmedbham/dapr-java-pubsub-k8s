@@ -1,4 +1,4 @@
-package com.example.demo.avro.util.serialization;
+package com.example.demo.avro.serialization;
 
 
 // import com.fasterxml.jackson.databind.ObjectMapper;

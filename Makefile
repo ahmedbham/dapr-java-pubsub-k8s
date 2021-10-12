@@ -29,8 +29,8 @@ create : delete
 	# deploy apps
 	# kubectl apply -f deploy/dapr-consumer.yaml
 	# kubectl apply -f deploy/dapr-producer.yaml
-	# kubectl apply -f deploy/springboot-consumer.yaml -n kafka
-	# kubectl apply -f deploy/springboot-producer.yaml -n kafka
+	# kubectl apply -f deploy/springboot-consumer.yaml
+	# kubectl apply -f deploy/springboot-producer.yaml
 	# kubectl apply -f deploy/kafka-function-deployment.yaml
 
 delete :

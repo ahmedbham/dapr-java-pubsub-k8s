@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import example.avro.*;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -21,14 +22,13 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.SendResult;
 import org.apache.kafka.common.serialization.StringSerializer;
 import com.example.demo.avro.util.serialization.AvroSerealizer;
-import com.example.demo.avro.model.*;
 
 @Slf4j
 @Service
 public class ProducerService {
 
     @Bean
-    public ProducerFactory<String, AvroHttpRequest> producerFactory() {
+    public ProducerFactory<String, User> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
@@ -43,28 +43,31 @@ public class ProducerService {
     }
 
     @Bean
-    public KafkaTemplate<String, AvroHttpRequest> kafkaTemplate() {
-        return new KafkaTemplate<String, AvroHttpRequest>(producerFactory());
+    public KafkaTemplate<String, User> kafkaTemplate() {
+        return new KafkaTemplate<String, User>(producerFactory());
     }           
 
    @Autowired
-    private KafkaTemplate<String, AvroHttpRequest> kafkaTemplate;
+    private KafkaTemplate<String, User> kafkaTemplate;
 
     public void produce(String message){
-        ClientIdentifier clientIdentifier = new ClientIdentifier("host1", "10.0.0.1");
-        String[] employeeNames = { "amp1", "emp2"};
-        // Active active = new Active();
-        AvroHttpRequest request = new AvroHttpRequest(100L, clientIdentifier, employeeNames, com.example.demo.avro.model.Active.YES );
-        // AvroSerealizer serealizer = new AvroSerealizer();
-        // byte[] data = serealizer.serealizeAvroHttpRequestJSON(request);
+
+      User user = User.newBuilder()
+             .setName("Charlie")
+             .setFavoriteColor("blue")
+             .setFavoriteNumber(null)
+             .build();
         
-        System.out.println("producing message: " + request.toString());
-        ListenableFuture<SendResult<String, AvroHttpRequest>> future = kafkaTemplate.send("messages", request);
+        // AvroSerealizer serealizer = new AvroSerealizer();
+        // byte[] data = serealizer.serealizeUserJSON(request);
+        
+        System.out.println("producing message: " + user.toString());
+        ListenableFuture<SendResult<String, User>> future = kafkaTemplate.send("messages", user);
         future.addCallback(
-        new ListenableFutureCallback<SendResult<String, AvroHttpRequest>>() {
+        new ListenableFutureCallback<SendResult<String, User>>() {
           
           @Override
-          public void onSuccess(SendResult<String, AvroHttpRequest> result) {
+          public void onSuccess(SendResult<String, User> result) {
             System.out.println("offset: " + result.getRecordMetadata().offset());
             // log.info(
             //     "Sent message=[{}] with offset=[{}]", message, result.getRecordMetadata().offset());
