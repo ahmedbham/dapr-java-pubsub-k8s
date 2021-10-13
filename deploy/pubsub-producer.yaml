@@ -5,6 +5,7 @@ metadata:
   labels:
     app: pubsub-producer
   name: pubsub-producer
+  namespace: kafka
 spec:
   replicas: 1
   selector:
@@ -35,21 +36,21 @@ status: {}
 ---
 
 
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: pubsub-producer-service
-  name: pubsub-producer-service
-spec:
-  ports:
-  - name: 8084-8084
-    port: 8084
-    protocol: TCP
-    targetPort: 8084
-  selector:
-    app: pubsub-producer-service
-  type: ClusterIP
-status:
-  loadBalancer: {}
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   creationTimestamp: null
+#   labels:
+#     app: pubsub-producer-service
+#   name: pubsub-producer-service
+# spec:
+#   ports:
+#   - name: 8084-8084
+#     port: 8084
+#     protocol: TCP
+#     targetPort: 8084
+#   selector:
+#     app: pubsub-producer-service
+#   type: ClusterIP
+# status:
+#   loadBalancer: {}
