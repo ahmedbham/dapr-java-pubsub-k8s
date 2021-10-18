@@ -21,8 +21,10 @@ public class WithoutCloudEventController {
     @Topic(name = "testingtopic", pubsubName = "messagebus")
     @PostMapping(path = "/testingtopic")
     public Mono<Void> handleInputBinding(@RequestParam (required = false) String msg) {
+      
         return Mono.fromRunnable(() -> {
             try {
+              
                 // CloudEvent envelope = SERIALIZER.deserialize(body, CloudEventEnvelope.class);
 
                 // String message = envelope.getData() == null ? "" : envelope.getData();

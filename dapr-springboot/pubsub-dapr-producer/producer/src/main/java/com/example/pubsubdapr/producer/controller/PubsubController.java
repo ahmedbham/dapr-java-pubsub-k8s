@@ -1,5 +1,6 @@
 package com.example.pubsubdapr.producer.controller;
 
+import com.example.pubsubdapr.producer.service.PublishByteNoCE;
 import com.example.pubsubdapr.producer.service.PublishHttpNoCE;
 import com.example.pubsubdapr.producer.service.PublishJsonNoCE;
 import com.example.pubsubdapr.producer.service.PubsubHttpService;
@@ -24,6 +25,9 @@ public class PubsubController {
 
     @Autowired
     private PublishJsonNoCE publishJsonNoCE;
+
+    @Autowired
+    private PublishByteNoCE publishByteNoCE;
 
     @GetMapping("/generate")
     public String callProduce(@RequestParam String message){
@@ -52,10 +56,20 @@ public class PubsubController {
     }
 
     @GetMapping("/nojsoncehttp")
-    public String makeJsonNoCERequest(@RequestParam String message){
+    public String makeJsonNoCERequest (@RequestParam String message){
         try{
             System.out.println("call pubsubhttpservice");
             publishJsonNoCE.httpNoCeRequest(message);
+        }
+        catch(Exception e){System.out.println("there was an exception");}
+        return "OK";
+    }
+
+    @GetMapping("/nocebytehttp")
+    public String makeByteNoCERequest(@RequestParam String message){
+        try{
+            System.out.println("call pubsubhttpservice");
+            publishByteNoCE.httpByteNoCeRequest(message);
         }
         catch(Exception e){System.out.println("there was an exception");}
         return "OK";

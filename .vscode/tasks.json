@@ -49,6 +49,17 @@
             "targetCluster": "k3d-k3s-default",
             "targetNamespace": "default",
             "useKubernetesServiceEnvironmentVariables": false
+        },
+        {
+            "appId": "demo-dapr-consumer",
+            "appPort": 3000,
+            "label": "daprd-debug",
+            "type": "daprd"
+        },
+        {
+            "appId": "demo-dapr-consumer",
+            "label": "daprd-down",
+            "type": "daprd-down"
         }
     ]
 }
