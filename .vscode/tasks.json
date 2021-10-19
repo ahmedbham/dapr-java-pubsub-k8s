@@ -49,6 +49,18 @@
             "targetCluster": "k3d-k3s-default",
             "targetNamespace": "default",
             "useKubernetesServiceEnvironmentVariables": false
+        },
+        {
+            "appId": "pubsub-producer",
+            "appPort": 3000,
+            "label": "daprd-debug",
+            "type": "daprd",
+            "componentsPath": "/workspaces/dapr-java-kubernetes/dapr-springboot/components/pubsub"
+        },
+        {
+            "appId": "pubsub-producer",
+            "label": "daprd-down",
+            "type": "daprd-down"
         }
     ]
 }

@@ -1,0 +1,12 @@
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: byte-subscription
+spec:
+  topic: bytetopic
+  route: /bytetopic
+  pubsubname: messagebus
+# scopes:
+# - fabrikam-functions
+# - dapr-consumer
+# - kafka-function

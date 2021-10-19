@@ -59,11 +59,17 @@
 			<version>1.2.0</version>
 
 		  </dependency>
-		  <dependency>
+		  <!-- <dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>4.9.0</version>
-		  </dependency>
+		  </dependency> -->
+		  <!-- avro -->
+		  <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.10.2</version>
+          </dependency>
 	</dependencies>
 
 	<build>
@@ -71,8 +77,77 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- <configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration> -->
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+				  <release>11</release>
+				</configuration>
+			  </plugin>
+			  <plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.10.2</version>
+				<executions>
+				  <execution>
+					<phase>generate-sources</phase>
+					<goals>
+					  <goal>schema</goal>
+					</goals>
+					<configuration>
+					  <sourceDirectory>${project.basedir}/../../</sourceDirectory>
+					  <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+					</configuration>
+				  </execution>
+				</executions>
+			  </plugin>
+			  <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin</artifactId>
+				<version>1.10.2</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			  </plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+			  <plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+				  <lifecycleMappingMetadata>
+					<pluginExecutions>
+					  <pluginExecution>
+						<pluginExecutionFilter>
+						  <groupId>org.apache.avro</groupId>
+						  <artifactId>avro-maven-plugin</artifactId>
+						  <versionRange>[1.10.2,)</versionRange>
+						  <goals>
+							<goal>schema</goal>
+						  </goals>
+						</pluginExecutionFilter>
+						<action>
+						  <execute />
+						</action>
+					  </pluginExecution>
+					</pluginExecutions>
+				  </lifecycleMappingMetadata>
+				</configuration>
+			  </plugin>
+			</plugins>
+		  </pluginManagement>
 	</build>
 
 </project>

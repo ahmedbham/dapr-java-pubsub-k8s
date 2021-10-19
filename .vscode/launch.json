@@ -1,7 +1,14 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
+        // {
+        //     "type": "java",
+        //     "name": "Launch Pubsub ProducerApplication",
+        //     "request": "launch",
+        //     "mainClass": "com.example.pubsubdapr.producer.ProducerApplication",
+        //     "projectName": "producer",
+        //     "args": "-jar target/producer-0.0.1-SNAPSHOT.jar -p 8084"
+        // },
         {
             "type": "java",
             "name": "Launch DemoApplication",
@@ -40,6 +47,25 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
+        },
+        {
+            "type": "java",
+            "name": "Launch DemoDaprConsumerApplication with Dapr",
+            "request": "launch",
+            "mainClass": "com.example.dapr.consumer.demodaprconsumer.DemoDaprConsumerApplication",
+            "projectName": "demo-dapr-consumer",
+            "preLaunchTask": "daprd-debug",
+            "postDebugTask": "daprd-down"
+        },
+        {
+            "type": "java",
+            "name": "Launch Pubsub ProducerApplication with Dapr",
+            "request": "launch",
+            "mainClass": "com.example.pubsubdapr.producer.ProducerApplication",
+            "projectName": "producer",
+            "args": "-jar target/producer-0.0.1-SNAPSHOT.jar -p 8084",
+            "preLaunchTask": "daprd-debug",
+            "postDebugTask": "daprd-down"
         }
     ]
 }
