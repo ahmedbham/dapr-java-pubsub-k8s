@@ -51,13 +51,14 @@
             "useKubernetesServiceEnvironmentVariables": false
         },
         {
-            "appId": "demo-dapr-consumer",
+            "appId": "pubsub-producer",
             "appPort": 3000,
             "label": "daprd-debug",
-            "type": "daprd"
+            "type": "daprd",
+            "componentsPath": "/workspaces/dapr-java-kubernetes/dapr-springboot/components/pubsub"
         },
         {
-            "appId": "demo-dapr-consumer",
+            "appId": "pubsub-producer",
             "label": "daprd-down",
             "type": "daprd-down"
         }

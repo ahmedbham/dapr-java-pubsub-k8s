@@ -48,4 +48,8 @@ docker run -d  --name docker-client docker.io/bitnami/kafka:2.8.0-debian-10-r84 
 
 docker  container exec -it docker-client bash
 
-{"requestTime": 100, "clientIdentifier": {"hostName": "host1", "ipAddress": "10.0.0.1"}, "employeeNames": ["amp1", "emp2"], "active": "YES"}
+dapr run --components-path /workspaces/dapr-java-kubernetes/dapr-springboot/components/pubsub --app-id pubsub-producer  -- java -jar target/producer-0.0.1-SNAPSHOT.jar com.example.pubsubdapr.producer.ProducerApplication -p 8084
+
+
+dapr run --components-path /workspaces/dapr-java-kubernetes/dapr-springboot/components/pubsub --app-id dapr-consumer  -- java -jar target/demo-dapr-consumer-0.0.1-SNAPSHOT.jar com.example.dapr.consumer.demodaprconsumer.DemoDaprConsumerApplication
+
