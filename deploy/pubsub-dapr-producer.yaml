@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pubsub-dapr-producer
+  name: pubsub-dapr-producer
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pubsub-dapr-producer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pubsub-dapr-producer
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "pubsub-dapr-producer"
+    spec:
+      containers:
+      - image: k3d-registry.localhost:5000/pubsub-dapr-producer
+        name: pubsub-dapr-producer
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pubsub-dapr-producer-service
+  name: pubsub-dapr-producer-service
+spec:
+  ports:
+  - name: 8184-8084
+    port: 8184
+    protocol: TCP
+    targetPort: 8084
+  selector:
+    app: pubsub-dapr-producer
+  type: ClusterIP

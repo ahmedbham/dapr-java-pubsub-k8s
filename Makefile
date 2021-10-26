@@ -21,18 +21,11 @@ create : delete
 	helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f deploy/kafka-non-persistence.yaml
 	# kubectl apply -f deploy/kafka_bindings.yaml
 	kubectl run dapr-kafka-client --restart='Never' --image docker.io/bitnami/kafka:2.8.0-debian-10-r84 --namespace kafka --command -- sleep infinity
-
-	# deploy keda
-	kubectl create namespace keda
-	helm install keda kedacore/keda --namespace keda
 	
 	# deploy apps
-	# kubectl apply -f deploy/dapr-consumer.yaml
-	# kubectl apply -f deploy/dapr-producer.yaml
-	# kubectl apply -f deploy/springboot-consumer.yaml
-	# kubectl apply -f deploy/springboot-producer.yaml
-	# kubectl apply -f deploy/kafka-function-deployment.yaml
-
+	# kubectl apply -f deploy/pubsub-dapr-consumer.yaml
+	# kubectl apply -f deploy/pubaub-dapr-producer.yaml
+	
 delete :
 	# delete the cluster (if exists)
 	@# this will fail harmlessly if the cluster does not exist

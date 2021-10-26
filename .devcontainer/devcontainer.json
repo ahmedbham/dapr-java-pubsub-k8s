@@ -33,9 +33,6 @@
 
 	// Install extensions
 	"extensions": [
-		"ms-dotnettools.csharp",
-		"ms-azuretools.vscode-docker",
-		"ms-azuretools.vscode-dapr",
 		"ms-kubernetes-tools.vscode-kubernetes-tools",
 		"davidanson.vscode-markdownlint",
 		"gruntfuggly.todo-tree",
